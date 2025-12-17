@@ -472,7 +472,6 @@ Este dashboard integrado muestra:
 3. **Panel superior derecho:** Evolución de RMSE con el mejor punto marcado en época 6
 4. **Panel inferior izquierdo:** Comparación de métricas finales (train vs val)
 5. **Panel inferior centro:** Ratio Val/Train por métrica
-6. **Panel inferior derecho:** [Learning rate evolution, si está disponible]
 
 ### 7.3 Análisis de Generalización
 
