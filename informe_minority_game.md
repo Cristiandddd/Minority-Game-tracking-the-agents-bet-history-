@@ -474,8 +474,8 @@ Este dashboard integrado muestra:
 1. **Panel superior izquierdo:** Evolución de Loss con el mejor punto marcado en época 6
 2. **Panel superior centro:** Evolución de MAE con el mejor punto marcado en época 16
 3. **Panel superior derecho:** Evolución de RMSE con el mejor punto marcado en época 6
-4. **Panel inferior izquierdo:** Comparación de métricas finales (train vs val)
-5. **Panel inferior centro:** Ratio Val/Train por métrica
+4. **Panel inferior centro:** Comparación de métricas finales (train vs val)
+5. **Panel inferior derecho:** Ratio Val/Train por métrica
 
 ### 7.3 Análisis de Generalización
 
