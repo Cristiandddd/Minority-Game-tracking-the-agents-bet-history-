@@ -142,7 +142,7 @@ Se analizaron **3,271 ejemplos** de secuencias filtradas, correspondientes a **1
 | **Media** | 2.5827 |
 | **Desviación estándar** | 7.5115 |
 
-![Distribución de Alpha](public/images/01-distribucion-alpha.png)
+![Distribución de Alpha](public/images/01_distribucion_alpha.png)
 
 **Interpretación:** La distribución de α muestra una fuerte concentración en valores bajos (α < 5), con aproximadamente 2,700 ejemplos (~82.5%) en este rango. La distribución exhibe una cola larga hacia valores altos, con algunos casos extremos cercanos a α = 100. Esta distribución sesgada refleja que la mayoría de las simulaciones exploraron el régimen de alta competencia (α pequeño), que es el más interesante desde el punto de vista de sistemas complejos.
 
@@ -157,37 +157,37 @@ Se analizaron **3,271 ejemplos** de secuencias filtradas, correspondientes a **1
 | **Entropía media** | 0.998 |
 | **Máxima racha media** | 10.8 |
 
-![Distribución de Proporción de 1's](public/images/02-proporcion-1s.png)
+![Distribución de Proporción de 1's](public/images/02_proporcion_1s.png)
 
 **Interpretación:** La distribución de la proporción de apuestas positivas (1's) muestra una distribución aproximadamente normal centrada en 0.5, indicando que las secuencias filtradas mantienen un balance equilibrado entre ambas opciones. Esta simetría es esperada en el Minority Game debido a la naturaleza competitiva del sistema: si un lado se vuelve dominante, los agentes adaptan sus estrategias para explotar el desequilibrio, restaurando el balance. La línea punteada roja marca el 50%, confirmando que la mayoría de los ejemplos exhiben comportamiento balanceado.
 
 ### 4.3 Relación entre Proporción de Apuestas y Alpha
 
-![Proporción de 1's vs Alpha](public/images/04-proporcion-vs-alpha.png)
+![Proporción de 1's vs Alpha](public/images/04_proporcion_vs_alpha.png)
 
 **Interpretación:** El gráfico de dispersión revela que la proporción de apuestas positivas se mantiene consistentemente alrededor de 0.5 para todos los valores de α, sin mostrar una correlación clara (correlación = 0.021). Esto indica que el balance entre las dos opciones es una propiedad robusta del Minority Game que se mantiene independiente del régimen de competencia. Sin embargo, se observa mayor dispersión en valores bajos de α (α < 5), sugiriendo que el régimen de alta competencia genera mayor variabilidad en las estrategias individuales, aunque el promedio global permanece balanceado.
 
 ### 4.4 Entropía de las Secuencias
 
-![Entropía vs Alpha](public/images/03-entropia-vs-alpha.png)
+![Entropía vs Alpha](public/images/03_entropia_vs_alpha.png)
 
 **Interpretación:** La entropía de las secuencias se mantiene consistentemente alta (≈ 0.99-1.0) para todos los valores de α, confirmando que las secuencias filtradas son altamente impredecibles y contienen información rica. La entropía cercana a 1 indica distribución uniforme entre ambas opciones, consistente con el comportamiento caótico esperado en el Minority Game. La correlación prácticamente nula con α (0.00035) sugiere que la impredecibilidad es una característica intrínseca del sistema independientemente del régimen de competencia.
 
 ### 4.5 Patrones Temporales en las Secuencias
 
-![Ejemplos de Secuencias Filtradas](public/images/05-ejemplos-secuencias.png)
+![Ejemplos de Secuencias Filtradas](public/images/05_ejemplos_secuencias.png)
 
 **Interpretación:** Se muestran tres ejemplos representativos de secuencias de apuestas para diferentes valores de α (0.36, 39.38, y 102.40). Las tres secuencias exhiben oscilaciones rápidas entre -1 y 1, sin patrones periódicos obvios, confirmando el comportamiento caótico. Visualmente, no se aprecian diferencias claras entre los regímenes de α bajo, medio y alto, lo que sugiere que las diferencias se encuentran en propiedades estadísticas sutiles de las secuencias que solo pueden ser capturadas por modelos de aprendizaje profundo.
 
 ### 4.6 Análisis de Rachas Consecutivas
 
-![Máxima Racha vs Alpha](public/images/06-max-racha-vs-alpha.png)
+![Máxima Racha vs Alpha](public/images/06_max_racha_vs_alpha.png)
 
 **Interpretación:** La máxima racha consecutiva de la misma apuesta muestra una tendencia débil a disminuir con valores más altos de α (correlación = -0.030). Para α < 5, se observan rachas que van desde 5 hasta 25 timesteps, con mayor concentración en rachas cortas (10-15). Esta variabilidad sugiere que en el régimen de alta competencia, algunos agentes ocasionalmente mantienen la misma estrategia por períodos extendidos. Para α > 20, las rachas máximas son consistentemente más cortas, indicando cambios de estrategia más frecuentes.
 
 ### 4.7 Matriz de Correlaciones
 
-![Matriz de Correlaciones](public/images/07-matriz-correlaciones.png)
+![Matriz de Correlaciones](public/images/07_matriz_correlaciones.png)
 
 #### Correlaciones con Alpha
 
