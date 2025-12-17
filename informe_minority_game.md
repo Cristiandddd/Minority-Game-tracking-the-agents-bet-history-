@@ -885,4 +885,37 @@ https://github.com/Cristiandddd/Minority-Game-tracking-the-agents-bet-history-/b
 
 ### Apéndice B: Configuración del Sistema
 
-*Pendiente: especificaciones de hardware y software*
+#### Hardware
+
+**Plataforma de cómputo:** RunPod (Cloud GPU Pod)
+
+**Especificaciones del sistema:**
+- **GPU:** NVIDIA A40 
+  - VRAM: 48 GB
+  - Arquitectura: Ampere
+- **CPU:** Intel(R) Xeon(R) Gold 6342 
+  - Frecuencia: 2.80 GHz
+- **RAM:** 50 GB
+
+#### Software
+
+**Sistema Operativo:** Linux (distribución del contenedor RunPod)
+
+**Entorno de desarrollo:**
+- **Python:** 3.10+
+- **TensorFlow/Keras:** 2.x
+- **NumPy:** 1.24+
+- **Pandas:** 2.0+
+- **Matplotlib:** 3.7+
+- **scikit-learn:** 1.3+
+
+**Herramientas de simulación:**
+- **Compilador C++:** g++ con soporte C++17
+- **Flags de optimización:** `-O3` para compilación optimizada
+
+#### Tiempo de entrenamiento
+
+- **Duración total:** ~26 épocas con early stopping ~203 minutos
+- **Tiempo por época:** ~469 segundos
+- **Recursos utilizados:** Entrenamiento acelerado por GPU A40
+
