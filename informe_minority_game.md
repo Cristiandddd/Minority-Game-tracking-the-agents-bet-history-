@@ -67,14 +67,14 @@ Cada archivo JSON contiene:
 
 ### 2.2 Filtrado de Datos
 
-Se implementó un sistema de filtrado robusto para eliminar secuencias de baja calidad que podrían perjudicar el entrenamiento del modelo.
+Se implementó un sistema de filtrado robusto para eliminar secuencias de baja calidad que podrían perjudicar el entrenamiento del modelo. Y solo se usarán los datos de las primeras 1,000 rondas (post-equilibración) para entrenar los modelos.
 
 #### Criterios de Filtrado
 
 **Filtro 1: Secuencias Monótonas**
 - Eliminación de secuencias donde todos los valores son idénticos
 - Descarte de secuencias con rachas excesivamente largas del mismo valor (> 100 elementos consecutivos)
-- **Justificación:** Estas secuencias no contienen información dinámica sobre el sistema
+- **Justificación:** Estas secuencias no contienen información dinámica sobre el sistema y a varias secuencias idénticas les podría corresponder diferentes valores de alpha
 
 **Filtro 2: Baja Variación Estadística**
 - Descarte de secuencias donde una opción domina excesivamente (> 95% de las apuestas)
@@ -114,7 +114,6 @@ El alto porcentaje de descartes (59%) se debe principalmente a secuencias comple
 1. Un agente encuentra una estrategia dominante que nunca cambia
 2. El sistema converge a un estado estable muy rápidamente
 3. Parámetros extremos de α generan comportamiento trivial
-4. El agente tiene estrategias mal inicializadas
 
 **Implicaciones para el entrenamiento:**
 
@@ -139,7 +138,7 @@ Se analizaron **3,271 ejemplos** de secuencias filtradas, correspondientes a **1
 | **Media** | 2.5827 |
 | **Desviación estándar** | 7.5115 |
 
-![Distribución de Alpha](/images/01-distribucion-alpha.png)
+![Distribución de Alpha](/public/images/01-distribucion-alpha.png)
 
 **Interpretación:** La distribución de α muestra una fuerte concentración en valores bajos (α < 5), con aproximadamente 2,700 ejemplos (~82.5%) en este rango. La distribución exhibe una cola larga hacia valores altos, con algunos casos extremos cercanos a α = 100. Esta distribución sesgada refleja que la mayoría de las simulaciones exploraron el régimen de alta competencia (α pequeño), que es el más interesante desde el punto de vista de sistemas complejos.
 
@@ -154,37 +153,37 @@ Se analizaron **3,271 ejemplos** de secuencias filtradas, correspondientes a **1
 | **Entropía media** | 0.998 |
 | **Máxima racha media** | 10.8 |
 
-![Distribución de Proporción de 1's](/images/02-proporcion-1s.png)
+![Distribución de Proporción de 1's](/public/images/02-proporcion-1s.png)
 
 **Interpretación:** La distribución de la proporción de apuestas positivas (1's) muestra una distribución aproximadamente normal centrada en 0.5, indicando que las secuencias filtradas mantienen un balance equilibrado entre ambas opciones. Esta simetría es esperada en el Minority Game debido a la naturaleza competitiva del sistema: si un lado se vuelve dominante, los agentes adaptan sus estrategias para explotar el desequilibrio, restaurando el balance. La línea punteada roja marca el 50%, confirmando que la mayoría de los ejemplos exhiben comportamiento balanceado.
 
 ### 4.3 Relación entre Proporción de Apuestas y Alpha
 
-![Proporción de 1's vs Alpha](/images/04-proporcion-vs-alpha.png)
+![Proporción de 1's vs Alpha](/public/images/04-proporcion-vs-alpha.png)
 
 **Interpretación:** El gráfico de dispersión revela que la proporción de apuestas positivas se mantiene consistentemente alrededor de 0.5 para todos los valores de α, sin mostrar una correlación clara (correlación = 0.021). Esto indica que el balance entre las dos opciones es una propiedad robusta del Minority Game que se mantiene independiente del régimen de competencia. Sin embargo, se observa mayor dispersión en valores bajos de α (α < 5), sugiriendo que el régimen de alta competencia genera mayor variabilidad en las estrategias individuales, aunque el promedio global permanece balanceado.
 
 ### 4.4 Entropía de las Secuencias
 
-![Entropía vs Alpha](/images/03-entropia-vs-alpha.png)
+![Entropía vs Alpha](/public/images/03-entropia-vs-alpha.png)
 
 **Interpretación:** La entropía de las secuencias se mantiene consistentemente alta (≈ 0.99-1.0) para todos los valores de α, confirmando que las secuencias filtradas son altamente impredecibles y contienen información rica. La entropía cercana a 1 indica distribución uniforme entre ambas opciones, consistente con el comportamiento caótico esperado en el Minority Game. La correlación prácticamente nula con α (0.00035) sugiere que la impredecibilidad es una característica intrínseca del sistema independientemente del régimen de competencia.
 
 ### 4.5 Patrones Temporales en las Secuencias
 
-![Ejemplos de Secuencias Filtradas](/images/05-ejemplos-secuencias.png)
+![Ejemplos de Secuencias Filtradas](/public/images/05-ejemplos-secuencias.png)
 
 **Interpretación:** Se muestran tres ejemplos representativos de secuencias de apuestas para diferentes valores de α (0.36, 39.38, y 102.40). Las tres secuencias exhiben oscilaciones rápidas entre -1 y 1, sin patrones periódicos obvios, confirmando el comportamiento caótico. Visualmente, no se aprecian diferencias claras entre los regímenes de α bajo, medio y alto, lo que sugiere que las diferencias se encuentran en propiedades estadísticas sutiles de las secuencias que solo pueden ser capturadas por modelos de aprendizaje profundo.
 
 ### 4.6 Análisis de Rachas Consecutivas
 
-![Máxima Racha vs Alpha](/images/06-max-racha-vs-alpha.png)
+![Máxima Racha vs Alpha](/public/images/06-max-racha-vs-alpha.png)
 
 **Interpretación:** La máxima racha consecutiva de la misma apuesta muestra una tendencia débil a disminuir con valores más altos de α (correlación = -0.030). Para α < 5, se observan rachas que van desde 5 hasta 25 timesteps, con mayor concentración en rachas cortas (10-15). Esta variabilidad sugiere que en el régimen de alta competencia, algunos agentes ocasionalmente mantienen la misma estrategia por períodos extendidos. Para α > 20, las rachas máximas son consistentemente más cortas, indicando cambios de estrategia más frecuentes.
 
 ### 4.7 Matriz de Correlaciones
 
-![Matriz de Correlaciones](/images/07-matriz-correlaciones.png)
+![Matriz de Correlaciones](/public/images/07-matriz-correlaciones.png)
 
 #### Correlaciones con Alpha
 
@@ -423,7 +422,7 @@ El modelo completó **26 épocas** antes de que el early stopping detuviera el e
 
 #### 7.2.1 Evolución de la Pérdida (MSE)
 
-![Loss durante entrenamiento](/images/01_loss_entrenamiento.png)
+![Loss durante entrenamiento](/public/images/01_loss_entrenamiento.png)
 
 **Observaciones clave:**
 
@@ -439,7 +438,7 @@ El modelo completó **26 épocas** antes de que el early stopping detuviera el e
 
 #### 7.2.2 Evolución del MAE (Mean Absolute Error)
 
-![MAE durante entrenamiento](/images/02_mae_entrenamiento.png)
+![MAE durante entrenamiento](/public/images/02_mae_entrenamiento.png)
 
 **Observaciones clave:**
 
@@ -452,7 +451,7 @@ El modelo completó **26 épocas** antes de que el early stopping detuviera el e
 
 #### 7.2.3 Evolución del RMSE (Root Mean Squared Error)
 
-![RMSE durante entrenamiento](/images/03_rmse_entrenamiento.png)
+![RMSE durante entrenamiento](/public/images/03_rmse_entrenamiento.png)
 
 **Observaciones clave:**
 
@@ -465,7 +464,7 @@ El modelo completó **26 épocas** antes de que el early stopping detuviera el e
 
 #### 7.2.4 Resumen Visual Completo
 
-![Resumen completo del entrenamiento](/images/07_resumen_completo.png)
+![Resumen completo del entrenamiento](/public/images/07_resumen_completo.png)
 
 Este dashboard integrado muestra:
 1. **Panel superior izquierdo:** Evolución de Loss con el mejor punto marcado en época 6
@@ -479,7 +478,7 @@ Este dashboard integrado muestra:
 
 #### 7.3.1 Ratio Validación/Entrenamiento
 
-![Ratio Val/Train por métrica](/images/06_ratio_val_train.png)
+![Ratio Val/Train por métrica](/public/images/06_ratio_val_train.png)
 
 **Análisis de ratios finales (última época):**
 
@@ -501,7 +500,7 @@ Este dashboard integrado muestra:
 
 #### 7.3.2 Evolución del Ratio por Época
 
-![Evolución del ratio Val/Train](/images/08_evolucion_ratio.png)
+![Evolución del ratio Val/Train](/public/images/08_evolucion_ratio.png)
 
 **Observaciones:**
 
@@ -516,7 +515,7 @@ Este dashboard integrado muestra:
 
 ### 7.4 Comparación: Mejor Época vs Época Final
 
-![Comparación mejor época vs final](/images/05_comparacion_final.png)
+![Comparación mejor época vs final](/public/images/05_comparacion_final.png)
 
 | Métrica | Train (Mejor) | Val (Mejor) | Época Mejor | Train (Final) | Val (Final) | Época Final |
 |---------|---------------|-------------|-------------|---------------|-------------|-------------|
