@@ -872,7 +872,7 @@ Queda abierta la pregunta: **¿Existe alguna forma de extraer α de secuencias i
 Posibilidades a explorar:
 1. **Análisis espectral**: Transformada de Fourier podría revelar frecuencias características
 2. **Teoría de información**: Calcular información mutua I(secuencia; α) formalmente
-3. **Longitud de secuencia**: Las 10,000 apuestas podrían ser insuficientes para α muy grandes
+3. **Longitud de secuencia**: Las 1,000 apuestas podrían ser insuficientes para α muy grandes
 4. **Transientes descartados**: Solo se usaron datos post-equilibración; la fase transitoria podría contener información
 
 ---
@@ -881,7 +881,7 @@ Posibilidades a explorar:
 
 ### Apéndice A: Código de Implementación
 
-*Pendiente: agregar snippets de código clave*
+https://github.com/Cristiandddd/Minority-Game-tracking-the-agents-bet-history-/blob/master/notebook%20filtrando%20los%20datos.ipynb
 
 ### Apéndice B: Configuración del Sistema
 
