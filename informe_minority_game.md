@@ -1,6 +1,10 @@
 # Predicción de Parámetros del Minority Game usando Redes Neuronales Recurrentes
 
 **Autor:** Christian Rodriguez Diaz
+**Tutor:** Dr. Ernesto Estevez Rams 
+**Fecha:** 16/12/2025
+**Institución:** Universidad de La Habana
+
 ---
 
 ## Resumen Ejecutivo
