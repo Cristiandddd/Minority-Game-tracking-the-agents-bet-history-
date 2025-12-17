@@ -1,10 +1,6 @@
 # Predicción de Parámetros del Minority Game usando Redes Neuronales Recurrentes
 
-**Autor:** [Tu Nombre]  
-**Tutor:** [Nombre del Tutor]  
-**Fecha:** [Fecha]  
-**Institución:** [Universidad/Instituto]
-
+**Autor:** Christian Rodriguez Diaz
 ---
 
 ## Resumen Ejecutivo
@@ -31,8 +27,8 @@ En cada tiempo t:
 El parámetro α = P/N = 2^M^/N es crucial para caracterizar el comportamiento del sistema:
 
 - **α pequeño (< 0.3):** Sistema frustrado con alta competencia. Los agentes no pueden coordinarse eficientemente y el sistema muestra alta volatilidad.
-- **α grande (> 0.5):** Recursos abundantes, baja competencia. El sistema converge a estados predecibles.
-- **α crítico (≈ 0.3-0.5):** Transición de fase y comportamiento crítico. El sistema exhibe propiedades complejas y emergentes.
+- **α grande (> 0.4):** Recursos abundantes, baja competencia. El sistema converge a estados predecibles.
+- **α crítico (≈ 0.3-0.4):** Transición de fase y comportamiento crítico. El sistema exhibe propiedades complejas y emergentes.
 
 ### 1.3 Objetivo
 
