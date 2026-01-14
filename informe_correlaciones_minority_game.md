@@ -4,7 +4,7 @@
 
 ## Resumen
 
-Este capítulo investiga cómo el parámetro de control α = P/N determina la estructura de correlaciones y el comportamiento colectivo de agentes en el Minority Game. El estudio se centra en tres preguntas fundamentales: (1) ¿cómo varía la predictibilidad de las decisiones individuales a través de los regímenes del sistema?, (2) ¿qué estructura de correlaciones emerge entre agentes y cómo se transforma al cruzar el punto crítico?, y (3) ¿existe flujo de información direccional entre agentes que revele dinámicas de liderazgo-seguimiento? Los resultados muestran que el punto crítico α_c ≈ 0.34 marca una transición cualitativa en la organización del sistema, con implicaciones para la comprensión de mercados financieros y sistemas de decisión colectiva.
+Este capítulo investiga cómo el parámetro de control α = P/N determina la estructura de correlaciones y el comportamiento colectivo de agentes en el Minority Game. El estudio se centra en tres preguntas fundamentales: (1) ¿cómo varía la predictibilidad de las decisiones individuales a través de los regímenes del sistema?, (2) ¿qué estructura de correlaciones emerge entre agentes y cómo se transforma al cruzar el punto crítico?, y (3) ¿existe flujo de información direccional entre agentes que revele dinámicas de liderazgo-seguimiento? Los resultados revelan un fenómeno inesperado: la población de agentes se segrega en dos clases claramente diferenciadas—agentes completamente deterministas y agentes completamente aleatorios—sin estados intermedios. Esta bimodalidad extrema persiste en todos los regímenes de α, sugiriendo que la estructura informacional individual es más robusta de lo anticipado, mientras que las diferencias entre regímenes se manifiestan en la proporción relativa de cada tipo de agente.
 
 ---
 
@@ -40,37 +40,105 @@ El capítulo se organiza siguiendo la línea lógica del análisis: primero cara
 
 ## 2. Entropía y Predictibilidad Individual
 
-La primera pregunta es fundamental: ¿qué tan predecibles son las decisiones de un agente? Si un agente siempre elige la misma opción, su comportamiento tiene entropía cero y es completamente predecible. Si elige aleatoriamente con probabilidad 50-50, su entropía es máxima (1 bit) y es completamente impredecible.
+### 2.1 El Problema de la Predictibilidad
 
-### 2.1 Entropía de Shannon: Aleatoriedad Aparente
+Una pregunta fundamental en el estudio de sistemas de agentes competitivos es: ¿qué tan predecibles son las decisiones individuales? En el Minority Game, esta pregunta adquiere relevancia particular porque los agentes no toman decisiones arbitrariamente, sino siguiendo estrategias que mapean estados de memoria a acciones. Si pudiéramos conocer la estrategia que un agente está usando y el estado actual de la memoria global, podríamos predecir su siguiente acción con certeza.
 
-La entropía de Shannon H = -Σ p(x) log₂ p(x) mide la incertidumbre en las decisiones de un agente. Para decisiones binarias, H alcanza su máximo de 1 bit cuando ambas opciones son igualmente probables.
+Sin embargo, desde una perspectiva externa donde solo observamos la secuencia de decisiones sin conocer las estrategias internas, la predictibilidad se convierte en una cuestión empírica. La entropía de Shannon proporciona la medida natural para esta incertidumbre: un agente que siempre elige la misma opción tiene entropía H = 0, mientras que uno que elige aleatoriamente con igual probabilidad tiene entropía máxima H = 1 bit.
 
-**Pregunta:** ¿Los agentes en el régimen crowded son más o menos predecibles que en el régimen diluted?
+La teoría del Minority Game sugiere predicciones claras sobre cómo debería variar la predictibilidad con α:
 
-**Hallazgo principal:** [Pendiente de resultados experimentales]
+- **Régimen crowded (α < α_c):** Los agentes compiten por estrategias limitadas, forzando a muchos a usar estrategias idénticas o muy similares. Dado que las estrategias deterministas generan comportamientos estructurados, esperaríamos menor entropía (mayor predictibilidad).
 
-La interpretación física es la siguiente: en el régimen crowded, los agentes están "atrapados" usando un conjunto limitado de estrategias, lo que podría hacer sus decisiones más predecibles. En el régimen diluted, la abundancia de estrategias permite mayor diversidad de comportamientos.
+- **Régimen diluted (α > α_c):** La abundancia de estrategias permite que cada agente use estrategias únicas. La diversidad resultante podría manifestarse como mayor aleatoriedad aparente, aproximándose al límite de entropía máxima.
 
-### 2.2 Entropía de Bloque: Dependencias Temporales
+- **Punto crítico (α ≈ α_c):** Las fluctuaciones máximas características del punto crítico podrían reflejarse en alta variabilidad de entropía entre agentes.
 
-La entropía de Shannon solo considera la frecuencia marginal de decisiones. Pero las decisiones de los agentes tienen memoria: dependen del historial reciente a través del mecanismo de estrategias. La entropía de bloque H_k examina secuencias de k decisiones consecutivas.
+### 2.2 Hallazgo Principal: Bimodalidad Extrema
 
-Si las decisiones fueran independientes, esperaríamos H_k = k × H_1. Desviaciones de esta linealidad revelan correlaciones temporales.
+El análisis de la entropía de Shannon para 139,908 secuencias de agentes a través de 72 valores distintos de α revela un resultado inesperado que contradice las expectativas teóricas simples: **la distribución de entropía es fuertemente bimodal en todos los regímenes**, con agentes concentrados exclusivamente en dos extremos:
 
-**Pregunta:** ¿Qué régimen exhibe mayor estructura temporal en las decisiones?
+| Régimen | N agentes | Media | Desv. Est. | Interpretación |
+|---------|-----------|-------|------------|----------------|
+| Crowded (α < 0.3) | 102,570 | 0.670 | 0.469 | Bimodal: mayoría aleatoria |
+| Crítico (0.3-0.4) | 14,408 | 0.409 | 0.491 | Bimodal: mayoría determinista |
+| Diluted (α > 0.4) | 22,930 | 0.415 | 0.492 | Bimodal: mayoría determinista |
 
-**Hallazgo principal:** [Pendiente de resultados experimentales]
+La Figura 1 muestra las distribuciones por régimen. Lo notable no son las medias—que efectivamente difieren entre regímenes—sino la estructura de las distribuciones: no existe un continuo de comportamientos, sino dos poblaciones discretas.
 
-### 2.3 Densidad de Entropía: La Impredecibilidad Irreducible
+![Distribución de entropía por régimen](images/04_01_distribucion_entropia_regimen.png)
+*Figura 1: Distribución de entropía de Shannon por régimen. Las tres distribuciones son bimodales, con picos en H ≈ 0 (agentes deterministas) y H ≈ 1 (agentes aleatorios). La línea punteada indica el valor teórico máximo H_max = 1 bit.*
 
-La densidad de entropía h = lim(H_k/k) cuando k→∞ representa la impredecibilidad "verdadera" del proceso, una vez descontadas las correlaciones temporales. Es la cantidad de información nueva generada por cada decisión.
+**Interpretación física:** Los agentes en el Minority Game se segregan naturalmente en dos clases:
 
-Esta medida es crucial porque permite comparar sistemas con diferentes estructuras de memoria. Un proceso con h bajo genera pocas sorpresas; uno con h alto es genuinamente impredecible.
+1. **Agentes deterministas (H ≈ 0):** Estos agentes eligen consistentemente la misma acción a lo largo de toda la simulación. En el contexto del MG, esto ocurre cuando un agente encuentra una estrategia "congelada"—una que consistentemente supera a sus alternativas dado el patrón de memoria observado. El agente se "bloquea" en esta estrategia ganadora.
 
-**Pregunta:** ¿Cómo se relaciona h con el régimen de α?
+2. **Agentes aleatorios (H ≈ 1):** Estos agentes alternan entre ambas acciones con frecuencia aproximadamente igual. Esto puede ocurrir cuando un agente cambia frecuentemente entre dos estrategias con predicciones opuestas, o cuando su estrategia dominante produce respuestas alternantes según el patrón de memoria.
 
-**Hallazgo principal:** [Pendiente de resultados experimentales]
+La ausencia de agentes con entropía intermedia (0.3 < H < 0.7) indica que los mecanismos de selección de estrategias en el MG producen comportamientos polarizados: o bien el agente encuentra un "atractor" estable (determinismo) o bien oscila persistentemente (aleatoriedad aparente).
+
+### 2.3 Dependencia con el Régimen de α
+
+El heatmap de entropía individual (Figura 2) permite visualizar cómo la composición de la población cambia con α. Cada columna representa un valor de α, y cada fila un agente; el color indica la entropía (verde = aleatoria, rojo = determinista).
+
+![Heatmap de entropía](images/04_04_heatmap_entropia.png)
+*Figura 2: Heatmap de entropía individual por agente y valor de α (escala logarítmica). La estructura diagonal refleja que configuraciones con mayor α tienen menos agentes (N menor). Las bandas rojas verticales representan configuraciones donde predominan agentes deterministas.*
+
+Tres observaciones emergen de esta visualización:
+
+1. **Para α pequeño (régimen crowded):** La proporción de agentes aleatorios (verdes) es mayor. Esto puede parecer paradójico dado que el régimen crowded implica competencia intensa por estrategias. La explicación reside en que cuando muchos agentes comparten estrategias similares, el estado de memoria fluctúa rápidamente, forzando a los agentes a alternar entre sus opciones.
+
+2. **Para α > α_c (régimen diluted):** Aumenta la proporción de agentes deterministas (rojos). Con abundancia de estrategias, es más probable que un agente encuentre una estrategia que domine consistentemente en su contexto particular.
+
+3. **Las transiciones son graduales:** No existe un cambio abrupto en α_c, sino una migración continua de la proporción de agentes de cada tipo.
+
+### 2.4 Estructura Temporal: Entropía de Bloque
+
+La entropía de Shannon marginal no captura las correlaciones temporales en las decisiones. Un agente podría tener H = 1 bit (50% de cada acción) pero exhibir patrones estructurados como rachas o periodicidades. La entropía de bloque H_k examina subsecuencias de k decisiones consecutivas y revela estas estructuras.
+
+Para procesos independientes e idénticamente distribuidos (i.i.d.), la entropía de bloque crece linealmente: H_k = k·H_1. Desviaciones por debajo de esta línea indican redundancia temporal—información que puede predecirse a partir de decisiones pasadas.
+
+![Entropía de bloque](images/04_05_Hk_vs_k.png)
+*Figura 3: Entropía de bloque H_k vs longitud de bloque k para agentes representativos de cada régimen. La línea punteada indica el crecimiento lineal esperado para procesos i.i.d. Los agentes del régimen crowded con H ≈ 1 muestran crecimiento lineal (sin estructura temporal), mientras que los agentes deterministas (H ≈ 0) en crítico y diluted permanecen en cero.*
+
+El resultado confirma la dicotomía identificada previamente:
+- **Agentes aleatorios:** H_k crece linealmente con pendiente 1, indicando que cada decisión es efectivamente independiente de las anteriores. No hay estructura temporal explotable.
+- **Agentes deterministas:** H_k ≈ 0 para todo k, trivialmente debido a que siempre eligen la misma acción.
+
+### 2.5 Densidad de Entropía: La Impredecibilidad Irreducible
+
+La densidad de entropía (entropy rate) h = lim_{k→∞}(H_k - H_{k-1}) representa la tasa de generación de información nueva por decisión, una vez descontada toda la estructura temporal. Es la impredecibilidad "verdadera" e irreducible del proceso.
+
+![Densidad de entropía vs α](images/04_06_entropy_rate_vs_alpha.png)
+*Figura 4: Densidad de entropía h vs α (escala logarítmica). La región sombreada indica la zona crítica. Las oscilaciones extremas entre h ≈ 0 y h ≈ 1 reflejan la bimodalidad de la población.*
+
+La Figura 4 muestra que h oscila entre sus valores extremos (0 y 1) para todos los valores de α, sin tendencia sistemática. Esto confirma que:
+
+1. **No existe un régimen con complejidad temporal intermedia:** Los agentes son o completamente predecibles (h = 0) o completamente impredecibles (h = 1).
+
+2. **El punto crítico no exhibe comportamiento especial en h:** A diferencia de otras cantidades del MG (como σ²/N) que muestran anomalías en α_c, la densidad de entropía individual no distingue el punto crítico.
+
+### 2.6 Complejidad Estadística (Excess Entropy)
+
+La excess entropy E = H_∞ - ∞·h mide la información total almacenada en las correlaciones temporales del proceso—cuánta "memoria" contiene la secuencia. Para procesos i.i.d., E = 0; valores positivos indican estructura.
+
+![Excess entropy vs α](images/04_07_excess_entropy_vs_alpha.png)
+*Figura 5: Complejidad estadística (excess entropy) vs α. Los valores son esencialmente cero en todo el rango, con un artefacto numérico en α muy alto.*
+
+El resultado E ≈ 0 para todo α refuerza la conclusión: las secuencias de decisiones de los agentes, vistas individualmente, son o bien triviales (siempre la misma acción) o bien procesos de Bernoulli (lanzamientos de moneda independientes). **No existe complejidad estructural intermedia a nivel individual.**
+
+### 2.7 Síntesis: La Paradoja de la Simplicidad Individual
+
+Los resultados de esta sección revelan una aparente paradoja: el Minority Game, conocido por generar dinámicas colectivas complejas, produce comportamientos individuales extremadamente simples. Cada agente es, desde la perspectiva informacional, indistinguible de una fuente trivial (constante o Bernoulli).
+
+Esta simplicidad individual no contradice la complejidad colectiva—de hecho, la explica. La riqueza del MG emerge de la **composición** de muchos agentes simples cuyas acciones están implícitamente correlacionadas a través de las estrategias compartidas y el estado de memoria común. Un agente individual no necesita ser complejo; basta con que su comportamiento simple esté acoplado al de los demás.
+
+La diferencia entre regímenes no reside en la complejidad individual, sino en la **proporción de agentes de cada tipo**:
+
+- **Régimen crowded:** Mayor fracción de agentes aleatorios (~67% con H ≈ 1), produciendo alta volatilidad colectiva.
+- **Régimen diluted:** Mayor fracción de agentes deterministas (~60% con H ≈ 0), permitiendo que las fluctuaciones se cancelen.
+
+Esta reinterpretación sugiere que la transición de fase del MG puede entenderse como una transición en la **composición poblacional** más que en el comportamiento individual.
 
 ---
 

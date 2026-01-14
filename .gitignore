@@ -4,6 +4,9 @@
 node_modules/
 
 betting_history*
+previous*
+resultados*
+scripts*
 
 # local env files
 .env*.local
