@@ -144,31 +144,86 @@ Esta reinterpretación sugiere que la transición de fase del MG puede entenders
 
 ## 3. Correlaciones Entre Agentes
 
-Más allá del comportamiento individual, la pregunta central es: ¿cómo se relacionan las decisiones de diferentes agentes?
+Más allá del comportamiento individual, la pregunta central es: ¿cómo se relacionan las decisiones de diferentes agentes? La Sección 2 reveló que los agentes individuales son informativamente simples—deterministas o aleatorios—pero esto no implica que sean independientes. De hecho, la física del Minority Game sugiere exactamente lo opuesto: los agentes comparten un estado de memoria común y muchos usan estrategias idénticas, creando acoplamientos implícitos que deberían manifestarse como correlaciones estadísticas.
 
-### 3.1 Correlación de Pearson: Sincronización Lineal
+### 3.1 La Paradoja de la Anticoordinación
 
-La correlación de Pearson ρ_ij mide el grado en que dos agentes i, j tienden a tomar la misma decisión (ρ > 0) o decisiones opuestas (ρ < 0) simultáneamente.
+Antes de examinar los datos, es crucial entender una tensión fundamental en el Minority Game. Por un lado, la dinámica del juego **debería** inducir correlaciones entre agentes:
 
-**Predicción teórica:** En el régimen crowded, donde múltiples agentes usan estrategias idénticas o similares, esperamos correlaciones positivas significativas. En el régimen diluted, las correlaciones deberían aproximarse a cero.
+- Agentes con la misma estrategia tomarán la misma decisión ante el mismo estado de memoria.
+- En el régimen crowded, múltiples agentes comparten estrategias, forzando comportamientos sincronizados.
+- El estado de memoria global actúa como un canal de comunicación implícito.
 
-**Hallazgo principal:** [Pendiente de resultados experimentales]
+Por otro lado, la **regla del juego** penaliza precisamente la coordinación: ganar requiere estar en minoría, es decir, tomar decisiones diferentes a la mayoría. Esta presión selectiva debería favorecer estrategias que eviten la sincronización.
 
-### 3.2 Información Mutua: Dependencias No Lineales
+Esta tensión entre los mecanismos que inducen correlación y la presión selectiva que las penaliza define la **paradoja de la anticoordinación**: prevalece la correlación estructural o la presión adaptativa?
 
-La correlación de Pearson solo captura dependencias lineales. La información mutua I(X;Y) detecta cualquier tipo de dependencia estadística, incluyendo relaciones no lineales.
+### 3.2 Hallazgo Principal: Correlaciones Universalmente Débiles
 
-**Pregunta:** ¿Existen dependencias no lineales entre agentes que la correlación de Pearson no detecta?
+El análisis de correlaciones de Pearson para todos los pares de agentes a través de 72 configuraciones de α revela un resultado contundente: **las correlaciones son extremadamente débiles en todos los regímenes**.
 
-**Hallazgo principal:** [Pendiente de resultados experimentales]
+![Distribución de correlaciones](/images/05-distribucion-correlaciones.png)
+*Figura 6: Panel superior izquierdo: distribución de correlaciones por régimen (escala logarítmica). Panel superior derecho: magnitud media |ρ| vs α. Panel inferior izquierdo: proporción de correlaciones positivas/negativas vs α. Panel inferior derecho: proporción de correlaciones significativas (|ρ| > 0.1) vs α.*
 
-### 3.3 Distribución de Correlaciones por Régimen
+Los datos cuantitativos confirman la debilidad de las correlaciones:
 
-Para caracterizar la estructura global de correlaciones, examinamos la distribución completa de todos los coeficientes de correlación ρ_ij.
+| Régimen | |ρ| media | % correlaciones |ρ| > 0.1 | Prop. positivas |
+|---------|----------|---------------------------|-----------------|
+| Crowded (α < 0.3) | 0.032 | 1.3% - 2.0% | ~50.3% |
+| Crítico (0.3 ≤ α ≤ 0.4) | 0.036 - 0.040 | 2.9% - 4.5% | ~49.5% |
+| Diluted (α > 0.4) | 0.035 - 0.044 | 3.1% - 6.9% | ~48.5% |
 
-En un sistema sin estructura, esperamos una distribución centrada en cero. Desviaciones sistemáticas indican organización colectiva.
+**Interpretación:** La magnitud típica de correlación (|ρ| ~ 0.03-0.04) es apenas distinguible de cero estadístico. Para poner esto en contexto: una correlación de 0.04 significa que conocer la decisión de un agente reduce la incertidumbre sobre otro agente en menos del 0.2%. A efectos prácticos, los agentes son independientes.
 
-**Hallazgo principal:** [Pendiente de resultados experimentales]
+### 3.3 Resolución de la Paradoja
+
+Los datos resuelven la paradoja de la anticoordinación de manera definitiva: **la presión selectiva domina sobre la correlación estructural**. A pesar de que los mecanismos del juego (estrategias compartidas, memoria común) deberían inducir correlaciones, la dinámica adaptativa del sistema las suprime casi por completo.
+
+Este resultado tiene una interpretación física elegante. El Minority Game es un sistema **autoorganizado crítico** en el sentido de que se ajusta continuamente para evitar estados de alta correlación:
+
+1. Si muchos agentes tomaran consistentemente la misma decisión (alta correlación positiva), todos perderían repetidamente.
+2. Esta retroalimentación negativa favorece a los agentes que logran diferenciarse.
+3. El resultado de equilibrio es un estado donde las correlaciones se cancelan estadísticamente.
+
+La débil correlación residual (~3-4%) representa el "mínimo irreducible"—la correlación estructural que el sistema no puede eliminar completamente porque los agentes no tienen conocimiento explícito de las decisiones de los demás.
+
+### 3.4 Tendencias Sutiles con α
+
+Aunque las correlaciones son uniformemente débiles, existen tendencias sistemáticas que merecen análisis:
+
+**1. La magnitud aumenta ligeramente con α:**
+
+La curva de |ρ| media vs α (panel superior derecho) muestra una tendencia ligeramente creciente, de ~0.032 en α bajo a ~0.040 en α intermedio. Esto parece paradójico: el régimen diluted, con mayor diversidad de estrategias, debería tener menor correlación.
+
+La explicación reside en el **tamaño de la muestra**. Para α alto, el número de agentes N es pequeño (N = P/α), lo que incrementa el ruido estadístico en las estimaciones de correlación. Los valores extremos para α > 50 son artefactos de tamaño de muestra.
+
+**2. La proporción positivas/negativas se desequilibra:**
+
+En el régimen crowded, las correlaciones positivas y negativas están casi exactamente balanceadas (~50.3% vs ~49.7%). A medida que α aumenta, emergen más correlaciones negativas (~52% vs ~48% en α alto).
+
+Esto refleja la naturaleza del régimen diluted: con estrategias diversas, los agentes tienden a "repartirse" entre las dos opciones, produciendo anticorrelación débil. Es una manifestación de la mayor eficiencia del sistema—las decisiones se distribuyen más uniformemente.
+
+**3. El punto crítico no es especial:**
+
+A diferencia de otras cantidades del MG (volatilidad, eficiencia), las correlaciones no muestran comportamiento anómalo en la región crítica α ~ 0.3-0.4. La proporción de correlaciones significativas aumenta gradualmente sin pico ni discontinuidad.
+
+### 3.5 Independencia Mediada: Un Modelo Conceptual
+
+Los resultados sugieren un modelo conceptual que llamamos **independencia mediada**: los agentes son funcionalmente independientes a pesar de compartir información a través del estado de memoria.
+
+En términos de teoría de la información, si M es el estado de memoria global:
+
+$$I(X_i; X_j) \approx 0 \quad \text{pero} \quad I(X_i; X_j | M) > 0$$
+
+Es decir, las decisiones de los agentes son marginalmente independientes, pero condicionadas al estado de memoria existe dependencia. Sin embargo, como el estado de memoria evoluciona rápidamente y de manera casi aleatoria (como se mostró en la Sección 2), esta dependencia condicional se "promedia" y desaparece en las estadísticas marginales.
+
+### 3.6 Síntesis: La Independencia como Propiedad Emergente
+
+Los resultados de esta sección complementan los hallazgos de la Sección 2. Los agentes individuales son simples (deterministas o aleatorios) Y las relaciones entre ellos son débiles (correlación ~3%). El Minority Game, a pesar de sus interacciones implícitas, produce un sistema de agentes **efectivamente independientes**.
+
+Esta independencia no es una propiedad diseñada sino **emergente**: surge de la presión selectiva del juego que penaliza la coordinación. Es un ejemplo notable de cómo reglas locales simples (elegir la minoría) pueden producir propiedades globales no triviales (independencia estadística).
+
+La pregunta que surge naturalmente es: si los agentes son independientes en sus decisiones, ¿son también independientes en sus **éxitos**? La siguiente sección aborda esta pregunta mediante el análisis de redes de co-victoria.
 
 ---
 
